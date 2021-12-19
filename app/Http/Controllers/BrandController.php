@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Brand;
+use App\Models\Multipic;
 use Auth;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use Image;
 
 class BrandController extends Controller
 {
@@ -36,7 +38,15 @@ class BrandController extends Controller
         $image_ext = strtolower($brand_image->getClientOriginalExtension());
         $image_name = $name_gen.'.'.$image_ext;
         $up_location = $path;
-        $brand_image->move($up_location,$image_name);
+        //must use intervention package to use the following
+        // create instance
+        $img = Image::make($brand_image);
+        // resize the image to a width of 300 and constrain aspect ratio (auto height)
+        $img->resize(300, null, function ($constraint) {
+            $constraint->aspectRatio();
+        })->save($up_location.$image_name);
+        
+        // $brand_image->move($up_location,$image_name);
         $last_img = $up_location.$image_name;
         return $last_img ;
     }
@@ -45,7 +55,7 @@ class BrandController extends Controller
         $validated = $this->ValidateBrand($request);
 
         $last_img = $this->processImage($request, 'brand_image', 'image/brand/');
-
+ 
         Brand::insert([
             'brand_name' => $request->brand_name,
             'brand_image' => $last_img,
@@ -61,7 +71,7 @@ class BrandController extends Controller
     }
     
     public function Update(Request $request, $id) {
-        $validated = $this->ValidateBrand($request);
+        // $validated = $this->ValidateBrand($request);
         $validated = $request->validate([
             'brand_name' => 'required|max:255',
             'brand_image' => 'required|mimes:jpg,jpeg,png,gif|min:4',
@@ -91,5 +101,37 @@ class BrandController extends Controller
         return Redirect()->back()->with('success', 'Brand Was Deleted Permanently');
     }
     
+    public function Multipic(){
+        $images = Multipic::All();
+        return view('admin.multipic.index', compact('images'));
+    }
+
+    public function StoreImage(Request $request) {
+        // $validated = $request->validate([
+        //     'images' => 'required|mimes:jpg,jpeg,png,gif',
+        // ]);
+
+        $images = $request->file('images');
+        $up_location = 'image/multi/';
+        
+        foreach($images as $image) {
+            $name_gen = hexdec(uniqid());
+            $image_ext = strtolower($image->getClientOriginalExtension());
+            $image_name = $name_gen.'.'.$image_ext;
+            
+            $img = Image::make($image);
+            $img->resize(300, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($up_location.$image_name);
+            
+            $last_img = $up_location.$image_name;
+    
+            Multipic::insert([
+                'image' => $last_img,
+                'created_at' => Carbon::now(),
+            ]);
+        }
+        return Redirect()->back()->with('success', 'Image/Images Added Successfully');
+    }
 }
 

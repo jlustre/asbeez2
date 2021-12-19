@@ -13,9 +13,13 @@
                     <div class="card">
                         <div class="card-header">Edit Brand</div>
                         <div class="card-body">
-                            <form action="{{ route('store.brand') }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ url('brand/update/'.$brand->id) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" name="old_image" value="{{ $brand->brand_image }}">
+                                <input type="hidden" name="id" value="{{ $brand->id }}">
+                                <div class="mb-3">
+                                    <label for="id" class="form-label">Brand ID</label>: {{ $brand->id }}
+                                </div>
                                 <div class="mb-3">
                                     <label for="brand_name" class="form-label">Brand Name</label>
                                     <input type="text" name="brand_name" class="form-control" id="brand_name"  value="{{ $brand->brand_name }}">
@@ -23,6 +27,7 @@
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
+
                                 <div class="mb-3">
                                     <label for="brand_image" class="form-label">Brand Image</label>
                                     <input type="file" name="brand_image" class="form-control" id="brand_image" value="{{ $brand->brand_image }}">

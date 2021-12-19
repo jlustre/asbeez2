@@ -31,7 +31,7 @@
                         @foreach ($brands as $brand)
                         <tr>
                             <th scope="row">{{ $brands->firstItem()+$loop->index }}</th>
-                            <td><img src="{{ asset($brand->brand_image) }}" alt="{{ $brand->brand_name. ' logo' }}" style="height:50px;"></td>
+                            <td><a href="{{ url('brand/edit/'.$brand->id) }}"><img src="{{ asset($brand->brand_image) }}" alt="{{ $brand->brand_name. ' logo' }}" style="height:50px;"></a></td>
                             <td><span class="txt-sm">{{ $brand->brand_image }}</span></td>
                             <td>{{ $brand->brand_name }}</td>
                             <td>{{ carbon\carbon::parse($brand->created_at)->diffForHumans() }}</td>
