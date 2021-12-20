@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
+    // public function __construct() {
+    //     $this->middleware('auth');
+    // }
+
     public function AllCat() {
         // $categories = DB::table('categories')->latest()->paginate(5); //Query Builder
         $categories = Category::latest()->paginate(5); //ORM Eloquent

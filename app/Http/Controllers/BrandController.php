@@ -12,6 +12,10 @@ use Image;
 
 class BrandController extends Controller
 {
+    // public function __construct() {
+    //     $this->middleware('auth');
+    // }
+
     public function AllBrand() {
         // $brands = DB::table('brands')->latest()->paginate(5); //Query Builder
         $brands = Brand::latest()->paginate(5); //ORM Eloquent
@@ -132,6 +136,11 @@ class BrandController extends Controller
             ]);
         }
         return Redirect()->back()->with('success', 'Image/Images Added Successfully');
+    }
+
+    public function Logout() {
+        Auth::logout();
+        return Redirect()->route('login')->with('success', 'You just logout successfully!');
     }
 }
 
