@@ -347,7 +347,37 @@
                             </li>
                           
                         
+                        <li  class="has-sub" >
+                          <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse" data-target="#homepage"
+                            aria-expanded="false" aria-controls="homepage">
+                            <span class="nav-text">{{ __('Homepage') }}</span> <b class="caret"></b>
+                          </a>
+                          <ul  class="collapse"  id="homepage">
+                            <div class="sub-menu">
+                              
+                              <li >
+                                <a href="sign-in.html">{{ __('About Us') }}</a>
+                              </li>
 
+                              <li >
+                                <a href="sign-in.html">{{ __('Slider') }}</a>
+                              </li>
+                              
+                              <li >
+                                <a href="sign-up.html">{{ __('Services') }}</a>
+                              </li>
+
+                              <li >
+                                <a href="sign-up.html">{{ __('Porfolio') }}</a>
+                              </li>
+
+                              <li >
+                                <a href="sign-up.html">{{ __('Brands') }}</a>
+                              </li>
+                              
+                            </div>
+                          </ul>
+                        </li>
                         
                         
                         <li  class="has-sub" >
