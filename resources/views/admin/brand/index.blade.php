@@ -17,9 +17,7 @@
                         <tr>
                         <th scope="col">#</th>
                         <th scope="col">Logo</th>
-                        <th scope="col">Brand Image</th>
-                        <th scope="col">Brand Name</th>
-                        <th scope="col">Created At</th>
+                        <th scope="col">Brand Name/Image/Created At</th>
                         <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -27,10 +25,8 @@
                         @foreach ($brands as $brand)
                         <tr>
                             <th scope="row">{{ $brands->firstItem()+$loop->index }}</th>
-                            <td><a href="{{ url('brand/edit/'.$brand->id) }}"><img src="{{ asset($brand->brand_image) }}" alt="{{ $brand->brand_name. ' logo' }}" style="height:50px;"></a></td>
-                            <td><span class="txt-sm">{{ $brand->brand_image }}</span></td>
-                            <td>{{ $brand->brand_name }}</td>
-                            <td>{{ carbon\carbon::parse($brand->created_at)->diffForHumans() }}</td>
+                            <td><a href="{{ url('brand/edit/'.$brand->id) }}"><img src="{{ asset($brand->brand_image) }}" alt="{{ $brand->brand_name. ' logo' }}" style="width: 200px;"></a></td>
+                            <td><span class="txt-sm"><strong>{{ $brand->brand_name }}</strong><br>{{ $brand->brand_image }}<br>{{ carbon\carbon::parse($brand->created_at)->diffForHumans() }}</span></td>
                             <td>
                                 <a href="{{ url('brand/edit/'.$brand->id) }}" class="btn btn-sm btn-info">Edit</a>
                                 <a href="{{ url('brand/softdelete/'.$brand->id) }}" class="btn btn-sm btn-warning">Delete</a>
@@ -50,9 +46,7 @@
                         <tr>
                         <th scope="col">#</th>
                         <th scope="col">Logo</th>
-                        <th scope="col">Brand Image</th>
-                        <th scope="col">Brand Name</th>
-                        <th scope="col">Created At</th>
+                        <th scope="col">Brand Name/Image/Created At</th>
                         <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -61,9 +55,7 @@
                         <tr>
                             <th scope="row">{{ $tbrands->firstItem()+$loop->index }}</th>
                             <td><img src="{{ asset($tbrand->brand_image) }}" alt="{{ $tbrand->brand_name. ' logo' }}" style="height:50px;"></td>
-                            <td><span class="txt-sm">{{ $tbrand->brand_image }}</span></td>
-                            <td>{{ $tbrand->brand_name }}</td>
-                            <td>{{ carbon\carbon::parse($tbrand->created_at)->diffForHumans() }}</td>
+                            <td><span class="txt-sm"><strong>{{ $tbrand->brand_name }}</strong><br>{{ $tbrand->brand_image }}<br>{{ carbon\carbon::parse($tbrand->created_at)->diffForHumans() }}</span></td>
                             <td>
                                 <a href="{{ url('brand/restore/'.$tbrand->id) }}" class="btn btn-sm btn-success">Restore</a>
                                 <a href="{{ url('brand/pdelete/'.$tbrand->id) }}" class="btn btn-sm btn-danger" onclick="return confirm('This will be permanently deleted. Are you sure you want to proceed?')">Force Delete</a>

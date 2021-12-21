@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\SliderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,11 +24,20 @@ Route::get('/email/verify', function () {
 
 Route::get('/', function () {
     $brands = DB::table('brands')->get();
-    return view('home', compact('brands'));
+    $sliders = DB::table('sliders')->latest()->get();
+    return view('home', compact('brands', 'sliders'));
 });
 
 Route::get('/multi/image', [BrandController::class, 'Multipic'])->name('multi.image');
 Route::post('/multi/add', [BrandController::class, 'StoreImage'])->name('store.image');
+
+Route::get('/slider/all', [SliderController::class, 'AllSlider'])->name('all.slider');
+Route::post('/slider/add', [SliderController::class, 'AddSlider'])->name('store.slider');
+Route::get('/slider/edit/{id}', [SliderController::class, 'Edit']);
+Route::get('/slider/softdelete/{id}', [SliderController::class, 'SoftDelete']);
+Route::post('/slider/update/{id}', [SliderController::class, 'Update']);
+Route::get('/slider/restore/{id}', [SliderController::class, 'Restore']);
+Route::get('/slider/pdelete/{id}', [SliderController::class, 'ForceDelete']);
 
 Route::get('/brand/all', [BrandController::class, 'AllBrand'])->name('all.brand');
 Route::post('/brand/add', [BrandController::class, 'AddBrand'])->name('store.brand');

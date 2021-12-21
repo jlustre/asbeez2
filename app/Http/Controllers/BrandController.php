@@ -78,10 +78,13 @@ class BrandController extends Controller
         // $validated = $this->ValidateBrand($request);
         $validated = $request->validate([
             'brand_name' => 'required|max:255',
-            'brand_image' => 'required|mimes:jpg,jpeg,png,gif|min:4',
         ]);
 
-        $last_img = $this->processImage($request, 'brand_image', 'image/brand/');
+        if($request->file('brand_image')) {
+            $last_img = $this->processImage($request, 'brand_image', 'image/brand/');
+        } else {
+            $last_img = $request->old_image;
+        }
 
         $update = Brand::find($id)->update([
             'brand_name' => $request->brand_name,
