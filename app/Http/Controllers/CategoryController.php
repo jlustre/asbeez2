@@ -10,14 +10,14 @@ use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
-    // public function __construct() {
-    //     $this->middleware('auth');
-    // }
+    public function __construct() {
+        $this->middleware('auth');
+    }
 
     public function AllCat() {
         // $categories = DB::table('categories')->latest()->paginate(5); //Query Builder
-        $categories = Category::latest()->paginate(5); //ORM Eloquent
-        $tcategories = Category::onlyTrashed()->latest()->paginate(3); //ORM Eloquent
+        $categories = Category::latest()->paginate(10); //ORM Eloquent
+        $tcategories = Category::onlyTrashed()->latest()->paginate(10); //ORM Eloquent
         return view('admin.category.index', compact('categories','tcategories'));
     }
 

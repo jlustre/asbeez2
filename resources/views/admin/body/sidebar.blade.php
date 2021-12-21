@@ -7,7 +7,7 @@
     <div id="sidebar" class="sidebar sidebar-with-footer">
             <!-- Aplication Brand -->
             <div class="app-brand">
-              <a href="/index.html">
+              <a href="{{ url('/') }}">
                 <svg
                   class="brand-icon"
                   xmlns="http://www.w3.org/2000/svg"
@@ -372,7 +372,10 @@
                               </li>
 
                               <li >
-                                <a href="sign-up.html">{{ __('Brands') }}</a>
+                                <a href="{{ route('all.brand') }}">{{ __('Brands') }}</a>
+                              </li>
+                              <li >
+                                <a href="{{ route('all.category') }}">{{ __('Categories') }}</a>
                               </li>
                               
                             </div>

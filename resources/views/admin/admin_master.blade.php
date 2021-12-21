@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title>Sleek - Admin Dashboard Template</title>
+  <title>AsBeez Admin</title>
 
   <!-- GOOGLE FONTS -->
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500|Poppins:400,500,600,700|Roboto:400,500" rel="stylesheet"/>
@@ -185,20 +185,9 @@
             <footer class="footer mt-auto">
                 <div class="copyright bg-white">
                 <p>
-                    &copy; <span id="copy-year">2019</span> Copyright Sleek Dashboard Bootstrap Template by
-                    <a
-                    class="text-primary"
-                    href="http://www.iamabdus.com/"
-                    target="_blank"
-                    >Abdus</a
-                    >.
+                    @include('admin.body.copyright')
                 </p>
                 </div>
-                <script>
-                    var d = new Date();
-                    var year = d.getFullYear();
-                    document.getElementById("copy-year").innerHTML = year;
-                </script>
             </footer>
 
         </div> <!-- page-wrapper -->
